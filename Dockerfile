@@ -1,4 +1,4 @@
-FROM python:3.7.9
+FROM python:3.8.6-slim-buster
 MAINTAINER "Boon SUI <boonsuli@gmail.com>"
 WORKDIR /app
 

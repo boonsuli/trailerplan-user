@@ -103,15 +103,15 @@ The entry data are tested.
 
 Docker : Containerisation
 -------------------------
-pull the image python:3.7.9.
+pull the image python:3.8.6-slim-buster
 
 ```shell script
-$ docker pull python:3.7.9 
+$ docker pull python:3.8.6-slim-buster 
 ```
 
 Docker file :
 ```text
-FROM python:3.7.9  
+FROM python:3.8.6-slim-buster 
 MAINTAINER boonsuli@gmail.com  
 WORKDIR /app    
 COPY ./requirements.txt /app/requirements.txt  
