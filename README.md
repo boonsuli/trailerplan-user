@@ -84,19 +84,25 @@ $ curl http://localhost:5000/trailerplan/api/v1.0/users/15
 
 The test data are in the list of User. They are some few ultra trailers (my favorite sports :-) ).
 
-1. Object model and DAO
------------------------
+
+
+MVC design : Object model and DAO
+---------------------------------
 It is a classic User (id, firstname, lastname, sexe, birthday, short address (id, city, country), civility).
 The address and abstract class are for future usage.
 The DAO can access to the data in the table by reading, writing and deleting.
 
-2. Controller
--------------
+
+
+MVC design : Controller
+-----------------------
 It is the rest API using flask. The controller managed few error status code like 404 or 400.
 The entry data are tested.
 
-3. Containerisation
--------------------
+
+
+Docker : Containerisation
+-------------------------
 pull the image python:3.7.9.
 
 ```shell script
@@ -128,6 +134,7 @@ To check inside the container with bash :
 ```shell script
 $ docker run -it trailerplan /bin/bash
 ```
+
 
 4. References
 -------------
