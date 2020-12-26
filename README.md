@@ -103,7 +103,7 @@ The entry data are tested.
 
 
 
-Docker : Containerisation
+Docker : Containerization
 -------------------------
 pull the image python:3.8.6-slim-buster.
 
