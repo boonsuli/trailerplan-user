@@ -1,10 +1,12 @@
 from flask import Flask, abort, make_response, request
 from flask_api import status
 from datetime import date
+from flask_restx import Api, Resource
 from munch import DefaultMunch
 import dataclasses
 import logging
 import orjson
+
 
 app = Flask(__name__)
 app.config.update(
@@ -12,6 +14,9 @@ app.config.update(
     TESTING=True,
     LOGGER_NAME='TrailerPlanLog'
 )
+api = Api(app)
+nameSpace = api.namespace('trailerplan/api/v1.1/users', description='TrailerPlan User API')
+
 
 FORMAT = '%(asctime)-15s %(message)s'
 logging.basicConfig(format=FORMAT)
@@ -19,55 +24,52 @@ logger = logging.getLogger('TrailerPlanApiLogger')
 logger.setLevel(logging.DEBUG)
 
 
-@app.route('/')
-def api(self):
-    return 'User API'
+@nameSpace.route("/")
+class UserCollectionController(Resource):
+
+    def get(self):
+        """ Retrieve all users """
+        users = UserDao(data).getUsers()
+        logger.debug('List of users : ' + orjson.dumps(users).decode("utf-8"))
+        return getResponseHttp(users)
+
+    @api.response(201, 'User successfully created')
+    def post(self):
+        """ Create a user """
+        trailer_str = orjson.loads(request.data) if request.data else abort(status.HTTP_400_BAD_REQUEST)
+        dao = UserDao(data)
+        trailer_obj = dao.create(trailer_str)
+        logger.debug(orjson.dumps(trailer_obj).decode("utf-8"))
+        return getResponseHttp(trailer_obj)
 
 
-@app.route('/trailerplan/api/v1.0/users', methods=['GET'])
-def get():
-    """ Retrieve all users """
-    users = UserDao(data).getUsers()
-    logger.debug('List of users : ' + orjson.dumps(users).decode("utf-8"))
-    return getResponseHttp(users)
+@nameSpace.route("/<int:id>")
+@api.response(404, 'User not found.')
+class UserItemController(Resource):
 
+    def get(self, id):
+        """ Retrieve a user by id """
+        dao = UserDao(data)
+        trailer2display = dao.get(id) if dao.getLength() > id else abort(404)
+        logger.debug('User requested : ' + orjson.dumps(trailer2display).decode("utf-8"))
+        return getResponseHttp(trailer2display)
 
-@app.route('/trailerplan/api/v1.0/users/<int:id>', methods=['GET'])
-def getById(id):
-    """ Retrieve a user by id """
-    dao = UserDao(data)
-    trailer2display = dao.get(id) if dao.getLength() > id else abort(404)
-    logger.debug('User requested : ' + orjson.dumps(trailer2display).decode("utf-8"))
-    return getResponseHttp(trailer2display)
+    @api.response(204, 'User successfully updated.')
+    def put(self, id):
+        """ Update a user by id """
+        trailer_obj = orjson.loads(request.data) if request.data else abort(status.HTTP_400_BAD_REQUEST)
+        dao = UserDao(data)
+        dao.update(id, trailer_obj)
+        logger.debug(orjson.dumps(trailer_obj).decode("utf-8"))
+        return None, 204
 
-
-@app.route('/trailerplan/api/v1.0/users/<int:id>', methods=['PUT'])
-def updateById(id):
-    """ Update a user by id """
-    trailer_obj = orjson.loads(request.data) if request.data else abort(status.HTTP_400_BAD_REQUEST)
-    dao = UserDao(data)
-    dao.update(id, trailer_obj)
-    logger.debug(orjson.dumps(trailer_obj).decode("utf-8"))
-    return getResponseHttp(trailer_obj)
-
-
-@app.route('/trailerplan/api/v1.0/users', methods=['POST'])
-def create():
-    """ Create a user """
-    trailer_str = orjson.loads(request.data) if request.data else abort(status.HTTP_400_BAD_REQUEST)
-    dao = UserDao(data)
-    trailer_obj = dao.create(trailer_str)
-    logger.debug(orjson.dumps(trailer_obj).decode("utf-8"))
-    return getResponseHttp(trailer_obj)
-
-
-@app.route('/trailerplan/api/v1.0/users/<int:id>', methods=['DELETE'])
-def removeById(id):
-    """ Remove a user by id """
-    dao = UserDao(data)
-    trailer_obj = data.pop(id) if 0 < id < dao.getLength() else abort(status.HTTP_400_BAD_REQUEST)
-    logger.debug(orjson.dumps(trailer_obj).decode("utf-8"))
-    return getResponseHttp(trailer_obj)
+    @api.response(204, 'User successfully deleted')
+    def delete(self, id):
+        """ Delete a user by id """
+        dao = UserDao(data)
+        trailer_obj = data.pop(id) if 0 < id < dao.getLength() else abort(status.HTTP_400_BAD_REQUEST)
+        logger.debug(orjson.dumps(trailer_obj).decode("utf-8"))
+        return None, 204
 
 
 def getResponseHttp(obj2dump):
