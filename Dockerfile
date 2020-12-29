@@ -9,7 +9,7 @@ COPY ./requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
 # copy the content of the local src directory
-COPY src /app
+COPY app /app
 
 # set env variable
 ENV FLASK_ENV = "docker"
