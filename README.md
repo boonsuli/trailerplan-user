@@ -1,8 +1,9 @@
 
-TRAILLER PLAN API
+TRAILER PLAN API
 ======================
 
-This project is an sample of rest api using flask, with docker or not.
+This project is an sample rest api using flask with docker or not.
+
 run the rest api under root dir of the project : 
 
 ```shell script
@@ -16,6 +17,7 @@ $ curl http://localhost:5000/trailerplan/api/v1.0/users
 
 $ [{"id":0,"firstName":"Kilian","lastName":"Jornet","sexe":"masculin","birthday":"1987-10-27","address":{"id":0,"city":"Sabadell","country":"Espagne"},"civility":"Monsieur"},{"id":1,"firstName":"Sebastien","lastName":"Chaigneau","sexe":"masculin","birthday":"1972-02-23","address":{"id":1,"city":"Châtellerault","country":"France"},"civility":"Monsieur"},{"id":2,"firstName":"Caroline","lastName":"Chaverot","sexe":"féminin","birthday":"1976-10-16","address":{"id":2,"city":"Genève","country":"Suisse"},"civility":"Madame"},{"id":3,"firstName":"Eric","lastName":"Clavery","sexe":"masculin","birthday":"1980-06-07","address":{"id":3,"city":"Coutances","country":"France"},"civility":"Monsieur"},{"id":4,"firstName":"François","lastName":"Delabarre","sexe":"masculin","birthday":"1968-01-03","address":{"id":4,"city":"Lille","country":"France"},"civility":"Monsieur"},{"id":5,"firstName":"Corinne","lastName":"Favre","sexe":"féminin","birthday":"1970-12-15","address":{"id":5,"city":"Chambéry","country":"France"},"civility":"Madame"},{"id":6,"firstName":"Emilie","lastName":"Forsberg","sexe":"féminin","birthday":"1986-12-11","address":{"id":6,"city":"Sollefteå","country":"Suède"},"civility":"Madame"},{"id":7,"firstName":"Anna","lastName":"Frost","sexe":"féminin","birthday":"1981-11-01","address":{"id":7,"city":"Dunedin","country":"Nouvelle-Zélande"},"civility":"Madame"},{"id":8,"firstName":"Maud","lastName":"Gobert","sexe":"féminin","birthday":"1977-04-25","address":{"id":8,"city":null,"country":"France"},"civility":"Madame"},{"id":9,"firstName":"Antoine","lastName":"Guillon","sexe":"masculin","birthday":"1970-06-16","address":{"id":9,"city":"Yvelines","country":"France"},"civility":"Monsieur"},{"id":10,"firstName":"Scott","lastName":"Jurek","sexe":"masculin","birthday":"1973-10-26","address":{"id":10,"city":"Duluth","country":"Etats-Unis"},"civility":"Monsieur"},{"id":11,"firstName":"Anton","lastName":"Krupicka","sexe":"masculin","birthday":"1983-08-08","address":{"id":11,"city":"Nebraska","country":"Etats-Unis"},"civility":"Monsieur"},{"id":12,"firstName":"Nathalie","lastName":"Mauclair","sexe":"féminin","birthday":"1970-05-09","address":{"id":12,"city":null,"country":"France"},"civility":"Madame"},{"id":13,"firstName":"Dawa","lastName":"Dachhiri Sherpa","sexe":"masculin","birthday":"1969-11-03","address":{"id":13,"city":"Taksindu Solukumbu","country":"Népal"},"civility":"Monsieur"},{"id":14,"firstName":"Xavier","lastName":"Thévenard","sexe":"masculin","birthday":"1988-03-06","address":{"id":14,"city":"Nantua","country":"France"},"civility":"Monsieur"}]
 ```
+
 
 Test 2 -- GET user by id
 ------------------------
@@ -101,9 +103,9 @@ The entry data are tested.
 
 
 
-Docker : Containerisation
+Docker : Containerization
 -------------------------
-pull the image python:3.8.6-slim-buster
+pull the image python:3.8.6-slim-buster.
 
 ```shell script
 $ docker pull python:3.8.6-slim-buster 
@@ -111,7 +113,7 @@ $ docker pull python:3.8.6-slim-buster
 
 Docker file :
 ```text
-FROM python:3.8.6-slim-buster 
+FROM python:3.8.6-slim-buster  
 MAINTAINER boonsuli@gmail.com  
 WORKDIR /app    
 COPY ./requirements.txt /app/requirements.txt  
@@ -129,6 +131,10 @@ Run :
 ```shell script
 $ docker run -id -p 5000:5000 trailerplan
 ```
+
+Run previous test 1...5
+
+
 
 To check inside the container with bash :
 ```shell script
