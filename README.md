@@ -1,8 +1,8 @@
 
-TRAILER PLAN API
-======================
+TRAILER PLAN USER API in Python
+===============================
 
-This project is an sample rest api using flask with docker or not.
+This project is an example of an API using flask with or without docker usage.
 
 run the rest api under root dir of the project : 
 
@@ -103,6 +103,14 @@ The entry data are tested.
 
 
 
+Swagger : 
+---------
+swagger-ui : http://localhost:5000
+
+![alt text](docs/images/trailerplan_api.png)
+
+
+
 Docker : Containerization
 -------------------------
 pull the image python:3.8.6-slim-buster.
@@ -142,9 +150,10 @@ $ docker run -it trailerplan /bin/bash
 ```
 
 
-4. References
+References
 -------------
 [flask](https://flask.palletsprojects.com/en/1.1.x/)
 [flask-api](https://github.com/flask-api/flask-api)
 [munch](https://github.com/Infinidat/munch)
 [orjson](https://github.com/ijl/orjson)
+[swagger](https://swagger.io)
