@@ -7,7 +7,7 @@ This project is an example of an API using flask with or without docker usage.
 run the rest api under root dir of the project : 
 
 ```shell script
-$ python src/user/UserModule.py
+$ python app/user/UserModule.py
 ```
 
 Test 1 -- GET users
@@ -126,7 +126,7 @@ MAINTAINER boonsuli@gmail.com
 WORKDIR /app    
 COPY ./requirements.txt /app/requirements.txt  
 RUN pip install -r requirements.txt  
-COPY src /app  
+COPY app /app  
 CMD [ "python", "./user/UserModule.py" ]  
 ```
 
